@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baratine Chat</title>
+
+<style type="text/css">
+
+#room {
+  display: none;
+}
+
+#messages {
+  min-width: 400px;
+  height: 300px;
+  list-style: none;
+  overflow:hidden;
+  overflow-y:scroll;
+}
+
+#list {
+  margin: 0;
+  padding: 10px;
+  height: 300px;
+  width: 120px;
+  overflow:hidden;
+  overflow-y:scroll;
+}
+
+#list li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#message {
+  padding: 10px;
+  width: 96%;
+  background-color: #F0F8FF;
+}
+
+.control-message {
+  color: red;
+}
+
+.my-message {
+  color: blue;
+}
+
+
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="index.js"></script>
+</head>
+
+<body>
+<div>
+  <input id="username" placeholder="Enter your username">
+  <button id="joinButton" type="button" onclick="joinChat()">Join chat</button>
+  <button id="leaveButton" type="button" value="leave" onclick="leaveChat()" disabled>Leave chat</button>
+  <input id="useWebSockets" type="checkbox" checked>use WebSockets</input>
+</div>
+
+<table id="room">
+  <tr>
+    <th>Room</th>
+    <th>Users</th>
+  <tr>
+    <td>
+      <ul id="messages"></ul>
+    </td>
+    <td>
+      <ul id="list"></ul>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <input type="text" id="message" name="text" placeholder="Enter message">
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
