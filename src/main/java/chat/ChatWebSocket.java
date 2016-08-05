@@ -27,8 +27,8 @@ public class ChatWebSocket implements ServiceWebSocket<Message, Message>
 
   @Inject
   @Service("pipe:///messages")
-  private PipeBroker<Message> _messagePipes;
-  private Pipe<Message> _messagePipe;
+  private PipeBroker<Message> _pipeBroker;
+  private Pipe<Message> _messagePipeHandler;
 
   private String _user;
 
@@ -89,8 +89,8 @@ public class ChatWebSocket implements ServiceWebSocket<Message, Message>
         onPipeReceive(msg);
       });
 
-      _messagePipes.subscribe(messageResult);
-      _messagePipe = messageResult.pipe();
+      _pipeBroker.subscribe(messageResult);
+      _messagePipeHandler = messageResult.pipe();
     });
   }
 
@@ -111,10 +111,10 @@ public class ChatWebSocket implements ServiceWebSocket<Message, Message>
     _user = null;
     _chat.leave(user, Result.ignore());
 
-    if (_messagePipe != null) {
-      _messagePipe.close();
+    if (_messagePipeHandler != null) {
+      _messagePipeHandler.close();
 
-      _messagePipe = null;
+      _messagePipeHandler = null;
     }
 
     if (! isClosed) {
